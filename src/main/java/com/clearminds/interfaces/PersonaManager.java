@@ -26,10 +26,27 @@ public class PersonaManager {
 	}
 	
 	
-	public PersonaManager() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+	public PersonaManager() throws InstanceExceptions{
 		String var=leerPropiedad("archivo");
-		Class<?> clase =Class.forName(var);
-		srv=(ServicioPersona)clase.newInstance();
+		Class<?> clase;
+		try {
+			clase = Class.forName(var);
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			throw new InstanceExceptions("Error");
+		}
+		try {
+			srv=(ServicioPersona)clase.newInstance();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new InstanceExceptions("Error");
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new InstanceExceptions("Error");
+		}
 
 	}
 	
